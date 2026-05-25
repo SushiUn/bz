@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>アイロンビーズ図案メーカー 50×50 | 写真風・ベタ塗りイラスト風</title>
+<title>アイロンビーズ図案メーカー 50×50 | PD番号ガイド付き</title>
 <style>
 :root{--bg:#fff8f3;--card:#fff;--ink:#27252b;--sub:#716d6b;--line:#e7ded8;--accent:#ef7059;--dark:#d75342;--teal:#187b82}
 *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 0 0,#ffe6d8,transparent 420px),var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;color:var(--ink)}
@@ -21,12 +21,27 @@ button{border:1px solid var(--line);border-radius:10px;padding:9px 11px;backgrou
 .center{padding:13px}.toolbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:7px;padding:0 2px 11px}.toolgroup{display:flex;gap:6px;flex-wrap:wrap}.toolbar button{font-size:12px;padding:8px 10px}
 .board{border:1px solid #ddd5ce;border-radius:12px;overflow:hidden;max-width:820px;margin:auto;background:#fff;touch-action:none}#pattern{display:block;width:100%;height:auto;image-rendering:pixelated;cursor:crosshair}
 .hint{text-align:center;color:var(--sub);font-size:12px;padding:11px 0 0}
+.guidebar{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:0 2px 10px}
+.guidecheck{border:1px solid var(--line);border-radius:10px;padding:8px 9px;font-size:12px;font-weight:700;background:#fff;display:flex;align-items:center;gap:5px}
+.guidecheck input{accent-color:var(--teal)}
+.board.zoom-board{overflow:auto;touch-action:pan-x pan-y}
+.board.zoom-board #pattern{width:1100px;max-width:none}
+.cellinfo{margin:10px auto 0;max-width:820px;border-radius:11px;background:#f0f8f8;border:1px solid #d8eded;color:#164f54;padding:10px 12px;font-size:13px;font-weight:700}
+.cellinfo strong{font-size:17px;color:var(--teal);margin:0 4px}
+.usedbox{max-width:820px;margin:12px auto 0;padding:11px;border:1px solid var(--line);border-radius:12px;background:#fffdfc}
+.usedhead{font-size:13px;font-weight:800;margin-bottom:8px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.usedhead small{font-size:10px;color:var(--sub);font-weight:600}
+#quickColors{display:flex;flex-wrap:wrap;gap:6px}
+.quick{display:flex;align-items:center;gap:5px;padding:6px 8px;border:1px solid var(--line);border-radius:9px;background:#fff;font-size:11px;cursor:pointer}
+.quick.focus{outline:2px solid var(--teal);border-color:transparent}
+.quick .dot{width:14px;height:14px}.quick strong{font-size:12px}.quick small{color:var(--sub)}
 .actions{display:flex;gap:6px;margin-bottom:10px}.actions button{flex:1;font-size:12px;padding:7px}
 #palette{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:370px;overflow:auto}.swatch{display:flex;align-items:center;gap:5px;padding:6px 5px;border:1px solid var(--line);border-radius:9px;cursor:pointer;min-width:0;font-size:11px;font-weight:700}.swatch.sel,.eraser.sel{outline:2px solid var(--teal)}.swatch.off{opacity:.43}.swatch input{margin:0;accent-color:var(--accent)}.dot{height:18px;width:18px;border-radius:50%;border:1px solid rgba(0,0,0,.18);flex:none}.name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.group{grid-column:span 2;padding:8px 4px 3px;font-size:12px;font-weight:800;color:var(--teal);border-bottom:1px solid var(--line);margin-top:4px}.eraser{grid-column:span 2;border:1px solid var(--line);border-radius:9px;padding:8px;display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;cursor:pointer}.empty{height:18px;width:18px;border:1px dashed #999;border-radius:50%;background:repeating-linear-gradient(-45deg,#fff,#fff 4px,#e9e9e9 4px,#e9e9e9 7px)}
-.total{border-top:1px solid var(--line);margin-top:16px;padding-top:14px;display:flex;justify-content:space-between;align-items:end}.total b{font-size:28px;color:var(--accent)}#counts{max-height:230px;overflow:auto;margin-top:9px}.count{display:grid;grid-template-columns:18px 1fr auto;gap:7px;align-items:center;font-size:12px;padding:4px 2px}.num{font-weight:700}.exports{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px}.exports button{font-size:12px}
+.total{border-top:1px solid var(--line);margin-top:16px;padding-top:14px;display:flex;justify-content:space-between;align-items:end}.total b{font-size:28px;color:var(--accent)}
+#counts{max-height:300px;overflow:auto;margin-top:9px;display:grid;gap:5px}.count{display:grid;grid-template-columns:20px 1fr auto;gap:8px;align-items:center;font-size:12px;padding:7px 6px;border:1px solid var(--line);border-radius:9px;background:#fff}.count.focus{outline:2px solid var(--teal)}.count strong{display:block;font-size:14px;color:var(--ink)}.code{display:block;color:var(--sub);font-size:10px}.num{font-weight:800;white-space:nowrap}.exports{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px}.exports button{font-size:12px}
 #toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,12px);opacity:0;background:#25252b;color:white;border-radius:99px;padding:10px 17px;font-size:13px;transition:.2s;pointer-events:none}#toast.show{opacity:1;transform:translate(-50%,0)}
 @media(max-width:1080px){main{grid-template-columns:320px 1fr}.right{grid-column:1/-1}#palette{grid-template-columns:repeat(4,1fr);max-height:none}.eraser{grid-column:span 4}}
-@media(max-width:720px){header{padding:16px 12px 13px;flex-direction:column;align-items:start}main{padding:0 10px 20px;display:flex;flex-direction:column}.center{order:-1}.card{width:100%}#palette{grid-template-columns:1fr 1fr}.eraser{grid-column:span 2}}
+@media(max-width:720px){header{padding:16px 12px 13px;flex-direction:column;align-items:start}main{padding:0 10px 20px;display:flex;flex-direction:column}.center{order:-1}.card{width:100%}#palette{grid-template-columns:1fr 1fr}.eraser{grid-column:span 2}.usedhead{flex-direction:column;align-items:start}.guidebar{gap:5px}.guidecheck{padding:7px 8px}}
 @media print{header,.left,.toolbar,.hint,.actions,#palette,.exports,#toast{display:none!important}body{background:#fff}main{display:block;padding:0}.card{box-shadow:none;border:0}.board{width:18cm;border:0}.right h2{display:block}#counts{max-height:none;display:grid;grid-template-columns:repeat(4,1fr)}}
 </style>
 </head>
@@ -54,9 +69,16 @@ button{border:1px solid var(--line);border-radius:10px;padding:9px 11px;backgrou
 <p class="note">色盤A・B・C（PD01〜PD72）を登録済みです。ベタ塗りモードはイラスト向け、写真風モードは色の変化を残したい画像向けです。</p>
 </section>
 <section class="card center">
-<div class="toolbar"><div class="toolgroup"><button id="undo" disabled>↶ 元に戻す</button><button id="redo" disabled>↷ やり直す</button><button id="clear">全消去</button></div><div class="toolgroup"><button id="png">ドット画像 PNG</button><button id="chart">図案 PNG</button></div></div>
-<div class="board"><canvas id="pattern" width="1100" height="1100"></canvas></div>
-<div class="hint">右で色を選び、マスをクリック／ドラッグして修正できます。</div>
+<div class="toolbar"><div class="toolgroup"><button id="undo" disabled>↶ 元に戻す</button><button id="redo" disabled>↷ やり直す</button><button id="clear">全消去</button></div><div class="toolgroup"><button id="png">ドット画像 PNG</button><button id="chart">色図案 PNG</button><button id="numberChart">番号入り図案 PNG</button></div></div>
+<div class="guidebar">
+<label class="guidecheck"><input type="checkbox" id="numbers" checked>マスにPD番号</label>
+<label class="guidecheck"><input type="checkbox" id="inspect" checked>タップで番号確認</label>
+<button id="boardZoom">🔎 番号を拡大確認</button>
+</div>
+<div class="board" id="board"><canvas id="pattern" width="1100" height="1100"></canvas></div>
+<div class="cellinfo" id="cellInfo">マスをタップすると、ここに使用する <strong>PD番号</strong> を表示します。</div>
+<div class="usedbox"><div class="usedhead">この図案で使う色番号 <small>色をタップするとその色を強調表示</small></div><div id="quickColors"></div></div>
+<div class="hint">「タップで番号確認」をOFFにすると、色を選んでマスを修正できます。</div>
 </section>
 <section class="card right">
 <h2>3. 色盤 A・B・C / 手動編集</h2>
@@ -72,12 +94,16 @@ button{border:1px solid var(--line);border-radius:10px;padding:9px 11px;backgrou
 const S=50,C=22,$=id=>document.getElementById(id);
 const raw=[['PD01 / B3','#A7C36D'],['PD02 / C3','#D2DEE0'],['PD03 / D9','#AE92B1'],['PD04 / E2','#DDA0AB'],['PD05 / G1','#EAC9AD'],['PD06 / A4','#F0C82A'],['PD07 / B5','#699A52'],['PD08 / C5','#4F9EC2'],['PD09 / D6','#74468C'],['PD10 / E4','#C64D6B'],['PD11 / G5','#D07B42'],['PD12 / A6','#E89637'],['PD13 / B8','#416D55'],['PD14 / C8','#364283'],['PD15 / D7','#5C3D77'],['PD16 / F5','#C94E39'],['PD17 / G7','#754635'],['PD18 / A7','#DB6330'],['PD19 / H1','#FFFFFF'],['PD20 / H2','#F5F4ED'],['PD21 / H3','#A59A9C'],['PD22 / H4','#5B5660'],['PD23 / H5','#312D32'],['PD24 / H7','#15151A'],['PD25 / C2','#C6DDE5'],['PD26 / C13','#D6E4E9'],['PD27 / D19','#B39DB0'],['PD28 / E8','#E7B7B2'],['PD29 / A13','#D38B27'],['PD30 / A11','#D3A044'],['PD31 / C10','#3D8EC1'],['PD32 / C6','#6794C5'],['PD33 / D18','#75609A'],['PD34 / E3','#DE7F82'],['PD35 / A10','#D36E34'],['PD36 / G9','#C68A4B'],['PD37 / C11','#4299B1'],['PD38 / C7','#46568E'],['PD39 / D21','#653A73'],['PD40 / D13','#943E6B'],['PD41 / F13','#D6574D'],['PD42 / G13','#974B3B'],['PD43 / B12','#234443'],['PD44 / D3','#2E3983'],['PD45 / D15','#32346D'],['PD46 / E7','#9A375C'],['PD47 / F8','#9A403C'],['PD48 / G8','#432725'],['PD49 / A3','#ECD049'],['PD50 / B20','#E8E5D7'],['PD51 / D16','#DAD4DE'],['PD52 / D8','#C1B4CB'],['PD53 / E1','#F3CDC0'],['PD54 / G2','#E6AD83'],['PD55 / B18','#AFC143'],['PD56 / B10','#9FC1A7'],['PD57 / D11','#A999BD'],['PD58 / D12','#C281B3'],['PD59 / E12','#DB7695'],['PD60 / G3','#D89772'],['PD61 / B14','#90AE39'],['PD62 / B19','#5D9D86'],['PD63 / D2','#6862A8'],['PD64 / D20','#6A447D'],['PD65 / E5','#B83E6A'],['PD66 / F10','#673128'],['PD67 / B17','#788D48'],['PD68 / B7','#387D78'],['PD69 / C16','#293470'],['PD70 / D14','#54324F'],['PD71 / E13','#843240'],['PD72 / F7','#682F2B']];
 const colors=raw.map((v,i)=>({id:i,name:v[0],hex:v[1],rgb:hex(v[1])})),basic=new Set(Array.from({length:24},(_,i)=>i)),active=new Set(colors.map(c=>c.id));
-let selected=5,cells=Array(S*S).fill(null),img=null,hist=[cells.slice()],hi=0,draw=false,last=-1,timer;
+let selected=5,cells=Array(S*S).fill(null),img=null,hist=[cells.slice()],hi=0,draw=false,last=-1,timer,focusId=null,magnified=false;
 const pat=$('pattern'),ctx=pat.getContext('2d'),prev=$('preview'),pctx=prev.getContext('2d'); pat.width=S*C;pat.height=S*C;
 function hex(v){let n=parseInt(v.slice(1),16);return[(n>>16)&255,(n>>8)&255,n&255]}
 function toast(t){$('toast').textContent=t;$('toast').classList.add('show');clearTimeout(timer);timer=setTimeout(()=>$('toast').classList.remove('show'),1600)}
 function palette(){const h=$('palette');h.innerHTML='';colors.forEach(c=>{if(c.id%24===0){let g=document.createElement('div');g.className='group';g.textContent='色盤'+['A','B','C'][Math.floor(c.id/24)]+'　PD'+String(c.id+1).padStart(2,'0')+'〜PD'+String(c.id+24).padStart(2,'0');h.append(g)}let l=document.createElement('label');l.className='swatch'+(c.id===selected?' sel':'');l.dataset.id=c.id;l.innerHTML=`<input type="checkbox" checked><span class="dot" style="background:${c.hex}"></span><span class="name">${c.name}</span>`;let ch=l.querySelector('input');ch.onclick=e=>e.stopPropagation();ch.onchange=()=>{ch.checked?active.add(c.id):active.delete(c.id);if(!active.size){ch.checked=true;active.add(c.id);toast('最低1色は必要です')}l.classList.toggle('off',!active.has(c.id))};l.onclick=e=>{if(e.target.tagName!=='INPUT'){selected=c.id;selection()}};h.append(l)});let e=document.createElement('div');e.id='eraser';e.className='eraser';e.innerHTML='<span class="empty"></span>空白（ビーズなし）';e.onclick=()=>{selected=null;selection()};h.append(e)}
-function selection(){document.querySelectorAll('.swatch').forEach(n=>n.classList.toggle('sel',Number(n.dataset.id)===selected));$('eraser').classList.toggle('sel',selected===null)}
+function pd(id){return 'PD'+String(Number(id)+1).padStart(2,'0')}
+function code(id){return colors[id].name.split(' / ')[1]||''}
+function selection(redraw=true){document.querySelectorAll('.swatch').forEach(n=>n.classList.toggle('sel',Number(n.dataset.id)===selected));$('eraser').classList.toggle('sel',selected===null);if(redraw)render()}
+function setInfo(id,index=null){if(id===null||id===undefined){$('cellInfo').innerHTML='このマスは <strong>空白</strong>（ビーズなし）です。';return}let position=index===null?'':`　位置：${Math.floor(index/S)+1}行 ${index%S+1}列`;$('cellInfo').innerHTML=`使用する色：<strong>${pd(id)}</strong> / ${code(id)}${position}`;}
+function focusColor(id){focusId=focusId===id?null:id;if(focusId!==null){selected=focusId;selection(false);setInfo(focusId)}render()}
 function palMode(mode){colors.forEach(c=>{let on=mode==='all'||basic.has(c.id),n=document.querySelector(`.swatch[data-id="${c.id}"]`),ch=n.querySelector('input');ch.checked=on;n.classList.toggle('off',!on);on?active.add(c.id):active.delete(c.id)});toast(mode==='all'?'全色を使用します':'色盤Aのみで変換します')}
 function checker(c,w,h){c.fillStyle='#fff';c.fillRect(0,0,w,h);c.fillStyle='#f1edeb';for(let y=0;y<h;y+=15)for(let x=0;x<w;x+=15)if((x/15+y/15)%2===0)c.fillRect(x,y,15,15)}
 function drawImg(c,w,h,transparent=false,smooth=true){if(!transparent)checker(c,w,h);else c.clearRect(0,0,w,h);if(!img)return;let cover=$('fit').value==='cover',base=cover?Math.max(w/img.width,h/img.height):Math.min(w/img.width,h/img.height),scale=base*Number($('zoom').value)/100,dw=img.width*scale,dh=img.height*scale,dx=(w-dw)*Number($('xpos').value)/100,dy=(h-dh)*Number($('ypos').value)/100;c.imageSmoothingEnabled=smooth;if(smooth)c.imageSmoothingQuality='high';c.drawImage(img,dx,dy,dw,dh)}
@@ -110,27 +136,60 @@ function styleMode(){
 }
 function strengthLabel(){let words=['','弱め','標準','強め'];$('flatText').textContent=words[Number($('flatStrength').value)]}
 function convert(){if(!img)return;let flat=$('style').value==='flat',strength=Number($('flatStrength').value),w=document.createElement('canvas');w.width=S;w.height=S;let c=w.getContext('2d',{willReadFrequently:true});drawImg(c,S,S,true,!flat);let d=new Float32Array(c.getImageData(0,0,S,S).data),out=Array(S*S).fill(null),dit=!flat&&$('dither').checked;for(let y=0;y<S;y++)for(let x=0;x<S;x++){let i=(y*S+x)*4;if(d[i+3]<40)continue;let id=closest(d[i],d[i+1],d[i+2]);out[y*S+x]=id;if(dit){let q=colors[id].rgb,er=d[i]-q[0],eg=d[i+1]-q[1],eb=d[i+2]-q[2];spread(d,x+1,y,er,eg,eb,7/16);spread(d,x-1,y+1,er,eg,eb,3/16);spread(d,x,y+1,er,eg,eb,5/16);spread(d,x+1,y+1,er,eg,eb,1/16)}}if(flat){out=mergeFlatColors(out,strength);out=cleanFlatDots(out,strength)}cells=out;save();render();toast(flat?'ベタ塗りイラスト風で変換しました':'写真風で変換しました')}
-function render(target=ctx,grid=$('grid').checked,size=C){target.fillStyle='#fff';target.fillRect(0,0,S*size,S*size);cells.forEach((id,i)=>{if(id!==null){let x=i%S*size,y=Math.floor(i/S)*size;target.fillStyle=colors[id].hex;target.fillRect(x,y,size,size);if(size>10){target.fillStyle='rgba(255,255,255,.22)';target.beginPath();target.arc(x+size*.36,y+size*.34,size*.18,0,Math.PI*2);target.fill()}}});if(grid){for(let n=0;n<=S;n++){let p=n*size+.5;target.strokeStyle=n%10===0?'#756f6a':'#dad5d0';target.lineWidth=n%10===0?1.5:.65;target.beginPath();target.moveTo(p,0);target.lineTo(p,S*size);target.stroke();target.beginPath();target.moveTo(0,p);target.lineTo(S*size,p);target.stroke()}}if(target===ctx)counts()}
-function counts(){let a={};cells.forEach(id=>{if(id!==null)a[id]=(a[id]||0)+1});let sum=Object.values(a).reduce((x,y)=>x+y,0);$('total').textContent=sum.toLocaleString();$('counts').innerHTML=Object.entries(a).sort((a,b)=>b[1]-a[1]).map(([id,n])=>`<div class="count"><span class="dot" style="background:${colors[id].hex}"></span><span>${colors[id].name}</span><span class="num">${n.toLocaleString()} 個</span></div>`).join('')||'<p class="note">まだビーズがありません。</p>'}
+function render(target=ctx,grid=$('grid').checked,size=C,withNumbers=(target===ctx&&$('numbers').checked),focus=(target===ctx?focusId:null)){
+  target.fillStyle='#fff';target.fillRect(0,0,S*size,S*size);
+  cells.forEach((id,i)=>{let x=i%S*size,y=Math.floor(i/S)*size;
+    if(id!==null){target.fillStyle=colors[id].hex;target.fillRect(x,y,size,size);
+      if(!withNumbers&&size>10){target.fillStyle='rgba(255,255,255,.22)';target.beginPath();target.arc(x+size*.36,y+size*.34,size*.18,0,Math.PI*2);target.fill()}
+      if(withNumbers){target.font=`800 ${Math.max(7,Math.floor(size*.39))}px sans-serif`;target.textAlign='center';target.textBaseline='middle';target.fillStyle=luma(colors[id].rgb)<125?'#fff':'#251e1b';target.fillText(String(id+1).padStart(2,'0'),x+size/2,y+size/2)}
+      if(focus===id){target.strokeStyle='#00a3ae';target.lineWidth=Math.max(1.5,size*.10);target.strokeRect(x+1,y+1,size-2,size-2)}
+    }
+  });
+  if(grid){for(let n=0;n<=S;n++){let p=n*size+.5;target.strokeStyle=n%10===0?'#756f6a':'#dad5d0';target.lineWidth=n%10===0?1.5:.65;target.beginPath();target.moveTo(p,0);target.lineTo(p,S*size);target.stroke();target.beginPath();target.moveTo(0,p);target.lineTo(S*size,p);target.stroke()}}
+  if(target===ctx)counts()
+}
+function counts(){
+  let a={};cells.forEach(id=>{if(id!==null)a[id]=(a[id]||0)+1});
+  let sum=Object.values(a).reduce((x,y)=>x+y,0), used=Object.entries(a).map(([id,n])=>[Number(id),n]).sort((a,b)=>a[0]-b[0]);
+  $('total').textContent=sum.toLocaleString();
+  $('counts').innerHTML=used.map(([id,n])=>`<div class="count ${focusId===id?'focus':''}" data-id="${id}"><span class="dot" style="background:${colors[id].hex}"></span><span><strong>${pd(id)}</strong><span class="code">色盤コード ${code(id)}</span></span><span class="num">${n.toLocaleString()} 個</span></div>`).join('')||'<p class="note">まだビーズがありません。</p>';
+  $('quickColors').innerHTML=used.map(([id,n])=>`<button class="quick ${focusId===id?'focus':''}" data-id="${id}" type="button"><span class="dot" style="background:${colors[id].hex}"></span><strong>${pd(id)}</strong><small>${n}個</small></button>`).join('')||'<span class="note">画像を変換すると使用色が表示されます。</span>';
+  document.querySelectorAll('.quick,.count').forEach(n=>n.onclick=()=>focusColor(Number(n.dataset.id)));
+}
 function save(){hist=hist.slice(0,hi+1);hist.push(cells.slice());if(hist.length>31)hist.shift();hi=hist.length-1;buttons()}
 function buttons(){$('undo').disabled=hi<=0;$('redo').disabled=hi>=hist.length-1}
 function history(step){let n=hi+step;if(n<0||n>=hist.length)return;hi=n;cells=hist[hi].slice();render();buttons()}
 function cell(e){let r=pat.getBoundingClientRect(),x=Math.floor((e.clientX-r.left)/r.width*S),y=Math.floor((e.clientY-r.top)/r.height*S);return x>=0&&x<S&&y>=0&&y<S?y*S+x:-1}
-function paint(e){let i=cell(e);if(i<0||i===last)return;cells[i]=selected;last=i;render()}
+function paint(e){let i=cell(e);if(i<0||i===last)return;cells[i]=selected;focusId=selected;last=i;setInfo(selected,i);render()}
 function labels(){$('zoomText').textContent=$('zoom').value+'%';$('xText').textContent=$('xpos').value==50?'中央':$('xpos').value<50?'左寄せ':'右寄せ';$('yText').textContent=$('ypos').value==50?'中央':$('ypos').value<50?'上寄せ':'下寄せ'}
 function load(f){if(!f||!f.type.startsWith('image/')){toast('画像ファイルを選択してください');return}let url=URL.createObjectURL(f),im=new Image();im.onload=()=>{img=im;$('convert').disabled=false;$('zoom').value=100;$('xpos').value=50;$('ypos').value=50;labels();drawImg(pctx,300,300);convert();URL.revokeObjectURL(url)};im.onerror=()=>{toast('画像を読み込めませんでした');URL.revokeObjectURL(url)};im.src=url}
 function download(canvas,name){let a=document.createElement('a');a.download=name;a.href=canvas.toDataURL('image/png');a.click()}
 function pixel(){let o=document.createElement('canvas');o.width=o.height=S*18;let c=o.getContext('2d');c.clearRect(0,0,o.width,o.height);cells.forEach((id,i)=>{if(id!==null){c.fillStyle=colors[id].hex;c.fillRect(i%S*18,Math.floor(i/S)*18,18,18)}});download(o,'iron-beads-pixel-50x50.png')}
 function chart(){let z=20,m=38,o=document.createElement('canvas');o.width=o.height=m+S*z+8;let c=o.getContext('2d');c.fillStyle='#fff';c.fillRect(0,0,o.width,o.height);c.font='12px sans-serif';c.textAlign='center';c.textBaseline='middle';c.fillStyle='#444';for(let n=0;n<S;n++)if(n===0||(n+1)%5===0){c.fillText(n+1,m+n*z+z/2,m-12);c.fillText(n+1,m-15,m+n*z+z/2)}cells.forEach((id,i)=>{c.fillStyle=id===null?'#fff':colors[id].hex;c.fillRect(m+i%S*z,m+Math.floor(i/S)*z,z,z)});for(let n=0;n<=S;n++){let p=m+n*z+.5;c.strokeStyle=n%10===0?'#555':'#d1d1d1';c.lineWidth=n%10===0?1.4:.6;c.beginPath();c.moveTo(p,m);c.lineTo(p,m+S*z);c.stroke();c.beginPath();c.moveTo(m,p);c.lineTo(m+S*z,p);c.stroke()}download(o,'iron-beads-pattern-50x50.png')}
+function numberedChart(){
+  let z=40,m=62,top=68,legend=300,a={},used=[];
+  cells.forEach(id=>{if(id!==null)a[id]=(a[id]||0)+1});used=Object.entries(a).map(([id,n])=>[Number(id),n]).sort((a,b)=>a[0]-b[0]);
+  let o=document.createElement('canvas');o.width=m+S*z+legend+30;o.height=Math.max(top+m+S*z+25,145+used.length*34);
+  let c=o.getContext('2d');c.fillStyle='#fff';c.fillRect(0,0,o.width,o.height);
+  c.fillStyle='#222';c.textAlign='left';c.textBaseline='middle';c.font='bold 25px sans-serif';c.fillText('アイロンビーズ 50×50　番号入り図案',m,30);
+  c.font='14px sans-serif';c.fillStyle='#555';c.fillText('各マスの表示は PD番号です（例：PD35）。',m,54);
+  c.textAlign='center';c.font='14px sans-serif';c.fillStyle='#444';
+  for(let n=0;n<S;n++)if(n===0||(n+1)%5===0){c.fillText(n+1,m+n*z+z/2,top+m-19);c.fillText(n+1,m-23,top+m+n*z+z/2)}
+  cells.forEach((id,i)=>{let x=m+i%S*z,y=top+m+Math.floor(i/S)*z;c.fillStyle=id===null?'#fff':colors[id].hex;c.fillRect(x,y,z,z);if(id!==null){c.font='bold 10px sans-serif';c.fillStyle=luma(colors[id].rgb)<125?'#fff':'#211c1a';c.fillText(pd(id),x+z/2,y+z/2)}});
+  for(let n=0;n<=S;n++){let p=m+n*z+.5;c.strokeStyle=n%10===0?'#555':'#d1d1d1';c.lineWidth=n%10===0?1.5:.65;c.beginPath();c.moveTo(p,top+m);c.lineTo(p,top+m+S*z);c.stroke();c.beginPath();c.moveTo(m,top+m+n*z);c.lineTo(m+S*z,top+m+n*z);c.stroke()}
+  let lx=m+S*z+32,ly=top+m;c.textAlign='left';c.fillStyle='#222';c.font='bold 18px sans-serif';c.fillText('使用色番号',lx,ly+12);
+  used.forEach(([id,n],k)=>{let y=ly+45+k*34;c.fillStyle=colors[id].hex;c.fillRect(lx,y-12,22,22);c.strokeStyle='#bbb';c.lineWidth=1;c.strokeRect(lx,y-12,22,22);c.fillStyle='#222';c.font='bold 14px sans-serif';c.fillText(`${pd(id)} / ${code(id)}`,lx+32,y);c.textAlign='right';c.fillText(`${n} 個`,o.width-24,y);c.textAlign='left'});
+  download(o,'iron-beads-numbered-pattern-50x50.png')
+}
 function csv(){let rows=[['行/列',...Array.from({length:S},(_,i)=>i+1)]];for(let y=0;y<S;y++)rows.push([y+1,...Array.from({length:S},(_,x)=>cells[y*S+x]===null?'':colors[cells[y*S+x]].name)]);let total={};cells.forEach(id=>{if(id!==null)total[id]=(total[id]||0)+1});rows.push([],['色','個数']);Object.entries(total).sort((a,b)=>b[1]-a[1]).forEach(([id,n])=>rows.push([colors[id].name,n]));let text='\uFEFF'+rows.map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(',')).join('\r\n'),a=document.createElement('a');a.download='iron-beads-colors-50x50.csv';a.href=URL.createObjectURL(new Blob([text],{type:'text/csv;charset=utf-8'}));a.click();setTimeout(()=>URL.revokeObjectURL(a.href),300)}
-palette();checker(pctx,300,300);styleMode();strengthLabel();render();buttons();
+palette();checker(pctx,300,300);styleMode();strengthLabel();selection(false);render();buttons();
 $('file').onchange=e=>load(e.target.files[0]);let drop=$('drop');['dragenter','dragover'].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault();drop.classList.add('drag')}));['dragleave','drop'].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault();drop.classList.remove('drag')}));drop.addEventListener('drop',e=>load(e.dataTransfer.files[0]));
 ['zoom','xpos','ypos','fit'].forEach(id=>$(id).addEventListener('input',()=>{labels();drawImg(pctx,300,300)}));
 $('style').onchange=()=>{styleMode();if(img)convert()};
 $('flatStrength').oninput=()=>{strengthLabel();if(img)convert()};
-$('convert').onclick=convert;$('all').onclick=()=>palMode('all');$('basic').onclick=()=>palMode('basic');$('grid').onchange=()=>render();$('undo').onclick=()=>history(-1);$('redo').onclick=()=>history(1);$('clear').onclick=()=>{cells.fill(null);save();render();toast('図案を消去しました')};
-pat.onpointerdown=e=>{draw=true;last=-1;pat.setPointerCapture(e.pointerId);paint(e)};pat.onpointermove=e=>{if(draw)paint(e)};pat.onpointerup=()=>{if(draw){draw=false;save()}};pat.onpointercancel=pat.onpointerup;
-$('png').onclick=pixel;$('chart').onclick=chart;$('csv').onclick=csv;$('print').onclick=()=>window.print();
+$('convert').onclick=convert;$('all').onclick=()=>palMode('all');$('basic').onclick=()=>palMode('basic');$('grid').onchange=()=>render();$('numbers').onchange=()=>render();$('boardZoom').onclick=()=>{magnified=!magnified;$('board').classList.toggle('zoom-board',magnified);$('boardZoom').textContent=magnified?'↩ 全体表示':'🔎 番号を拡大確認';if(magnified)toast('スクロールして番号を確認できます')};$('undo').onclick=()=>history(-1);$('redo').onclick=()=>history(1);$('clear').onclick=()=>{cells.fill(null);focusId=null;save();render();toast('図案を消去しました')};
+pat.onpointerdown=e=>{let i=cell(e);if(i<0)return;if($('inspect').checked){focusId=cells[i];setInfo(cells[i],i);render();return}draw=true;last=-1;pat.setPointerCapture(e.pointerId);paint(e)};pat.onpointermove=e=>{if(draw)paint(e)};pat.onpointerup=()=>{if(draw){draw=false;save()}};pat.onpointercancel=pat.onpointerup;
+$('png').onclick=pixel;$('chart').onclick=chart;$('numberChart').onclick=numberedChart;$('csv').onclick=csv;$('print').onclick=()=>window.print();
 })();
 </script>
 </body>
